@@ -23,7 +23,7 @@ virtualenv --python=шлях_до_файлу_python.exe ім'я_середови
   ```
 
 Переходимо у папку Scripts і активуємо його:
-*activate.bat*
+`activate.bat`
 
 Далі інсталюємо неохідні залежності:
 ```
