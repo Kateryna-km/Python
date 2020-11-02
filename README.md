@@ -27,8 +27,8 @@ pip install pyenv-win --target %USERPROFILE%\.pyenv
 pip install flask
 pip install gevent
 ```
-gevent виконує роль wsgi-сервера. Запускається командою:
-```
+gevent виконує роль wsgi-сервера. Код для запуску:
+```python
 server = WSGIServer(('127.0.0.1', 5000), app)
 server.serve_forever()
 ```
