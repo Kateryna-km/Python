@@ -1,9 +1,14 @@
+cffi==1.14.3
 click==7.1.2
 Flask==1.1.2
+gevent==20.9.0
+greenlet==0.4.17
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-pip==20.2.4
-setuptools==50.3.2
+mod-wsgi==4.7.1
+pycparser==2.20
+waitress==1.4.4
 Werkzeug==1.0.1
-wheel==0.35.1
+zope.event==4.5.0
+zope.interface==5.1.2
