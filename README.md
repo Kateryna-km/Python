@@ -16,7 +16,7 @@
 
 
 **Створення міграцій за допомогою SQLAlchemy**
-Міграції були створені за допомогою наступних команд:
+Після інсталювання необхідних бібліотек (flask-script, flask-sqlalchemy, flask-migrate (command ex."pip install flask-script")) за допомогою наступних команд були створені міграції:
 - python app.py db init
 - python app.py db migrate
 - python app.py db upgrade
@@ -24,23 +24,6 @@
 
 **Таблиці:** 
 
-*Подія* </br>
-- id </br>
-- назва </br>
-- дата </br>
-- автор події </br>
 
-*Користувач*</br>
-- id </br>
-- нікнейм </br>
-- ім'я </br>
-- прізвище </br>
-- e-mail </br>
-- пароль </br>
-- номер телефону </br>
-
-*Календар*</br>
-- id </br>
-- доданий користувач </br>
-- подія </br>
+![Image alt](https://github.com/Kateryna-km/Python/blob/lab-3/Database%20ER%20diagram%20(crow's%20foot).png)
 
