@@ -9,8 +9,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-#app.config.from_pyfile('config.cfg')
-
 migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
@@ -42,13 +40,5 @@ class Event(db.Model):
     autor = db.Column(db.Integer, unique=True, nullable=False)
 
 
-#@app.route('/api/v1/hello-world-10')
-#def hello_word():
-#    return 'Hello World 5'
-
-
 if __name__ == '__main__':
     manager.run()
-#print('http://127.0.0.1:5000/api/v1/hello-world-10')
-#server = WSGIServer(('127.0.0.1', 5000), app)
-#server.serve_forever()
