@@ -301,7 +301,7 @@ paths:
       responses:
         default:
           description: successful operation
-  '/user/{username}':
+  '/user/{userId}':
     get:
       tags:
         - user
