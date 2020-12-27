@@ -369,8 +369,9 @@ def delete_group(event_id):
     return 'Delete success'
 
 
-print('http://127.0.0.1:5000/api/v1/hello-world-10')
+'''print('http://127.0.0.1:5000/api/v1/hello-world-10')
 server = WSGIServer(('127.0.0.1', 5000), app)
-server.serve_forever()
+server.serve_forever()'''
 
-
+if __name__ == '__main__':
+    app.run()
