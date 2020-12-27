@@ -176,7 +176,8 @@ def list_users_of_event(id):
 # good
 @app.route("/user", methods=["POST"])
 def create_user():
-    user_data = request.args
+    #user_data = request.args
+    user_data = request.get_json()
 
     username = user_data.get('username')
     firstName = user_data.get('firstName')

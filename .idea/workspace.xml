@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3614dda-8b3a-4f11-bdaf-4c95bab64568" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hello.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
@@ -37,6 +34,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Python Unit Test" />
       </list>
     </option>
   </component>
@@ -178,7 +176,7 @@
       <workItem from="1607769193196" duration="10646000" />
       <workItem from="1607783874463" duration="18740000" />
       <workItem from="1607804427916" duration="401000" />
-      <workItem from="1609101783399" duration="1154000" />
+      <workItem from="1609101783399" duration="1837000" />
     </task>
     <servers />
   </component>
@@ -207,26 +205,26 @@
     </state>
     <state x="457" y="148" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1607806800699" />
     <state x="548" y="179" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1609102332890" />
-    <state width="1493" height="262" key="GridCell.Tab.0.bottom" timestamp="1609102878663">
+    <state width="1493" height="108" key="GridCell.Tab.0.bottom" timestamp="1609103309671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1607936171260" />
-    <state width="1493" height="262" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609102878663" />
-    <state width="1493" height="262" key="GridCell.Tab.0.center" timestamp="1609102878663">
+    <state width="1493" height="108" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609103309671" />
+    <state width="1493" height="108" key="GridCell.Tab.0.center" timestamp="1609103309671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1607936171260" />
-    <state width="1493" height="262" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609102878663" />
-    <state width="1493" height="262" key="GridCell.Tab.0.left" timestamp="1609102878663">
+    <state width="1493" height="108" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609103309671" />
+    <state width="1493" height="108" key="GridCell.Tab.0.left" timestamp="1609103309671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1607936171260" />
-    <state width="1493" height="262" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609102878663" />
-    <state width="1493" height="262" key="GridCell.Tab.0.right" timestamp="1609102878663">
+    <state width="1493" height="108" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609103309671" />
+    <state width="1493" height="108" key="GridCell.Tab.0.right" timestamp="1609103309671">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1607936171260" />
-    <state width="1493" height="262" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609102878663" />
+    <state width="1493" height="108" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609103309671" />
     <state width="189" height="457" key="HiddenNamespacesPopup" timestamp="1607702169909">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -242,6 +240,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Python$Hello.coverage" NAME="Hello Coverage Results" MODIFIED="1609102669049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Python$Flask__Hello_py_.coverage" NAME="Flask (Hello.py) Coverage Results" MODIFIED="1609102878655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Python$Flask__Hello_py_.coverage" NAME="Flask (Hello.py) Coverage Results" MODIFIED="1609103308198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
