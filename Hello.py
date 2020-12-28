@@ -51,36 +51,32 @@ def http_405_handler(error):
 
 # good 400
 @app.route("/event", methods=["POST"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def add_event():
     if request.method == 'POST':
         current_user = get_jwt_identity()
         user = User.query.filter_by(username=current_user).first()
-
-        event_data = request.args
-
+        #event_data = request.args
+        event_data = request.get_json()
         name = event_data.get('name')
         date = event_data.get('date')
         author = user.id
-        #author = event_data.get('author')
 
+        #author = event_data.get('author')
         #try:
         #    EventToCreate().load(event_data)
         #except ValidationError:
         #    abort(400, description="Invalid Group")
 
         new_event = Event(name=name, date=date, author=author)
-
-
         db.session.add(new_event)
         db.session.commit()
 
         new_group = Calendar(user_id=author, event_id=new_event.id)
-
         db.session.add(new_group)
         db.session.commit()
         return jsonify(_id().dump(new_event))
-
     else:
         abort(405, description="Method Not Allowed")
 
@@ -94,9 +90,7 @@ def event_by_date(date):
         abort(404, description="Event not found")
 
     all_events = Event.query.filter_by(date=date).all()
-
     result = events_schema.dump(all_events)
-
     return events_schema.jsonify(result)
 
 
@@ -114,43 +108,44 @@ def event_by_id(id):
 
 # http://127.0.0.1:5000/event/7?name=Dse&date=21.12.2023
 @app.route("/event/<int:id>", methods=["PUT"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def update_event_with_form_data(id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
-    event_data = request.args
+    #event_data = request.args
+    event_data = request.get_json()
     if Event.query.filter_by(id=id, author=user.id).first() is None:
         abort(404, description="Event not found")
     up_event = Event.query.get(id)
     up_event.name = event_data.get('name')
     up_event.date = event_data.get('date')
-
     try:
         EventToUpdate().load(event_data)
     except ValidationError:
         abort(400, description="Invalid Group")
     db.session.commit()
-
     return event_schema.jsonify(up_event)
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # good
 @app.route("/event/<int:id>", methods=["DELETE"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def delete_event(id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
+    event = Event.query.get(id)
     if Event.query.filter_by(id=id, author=user.id).first() is None:
         abort(404, description="Event not found")
-    event = Event.query.get(id)
+    
     if event is None:
         abort(404, description="Event not found")
-
     Calendar.query.filter_by(event_id=id).delete()
 
     db.session.delete(event)
     db.session.commit()
-
     return event_schema.jsonify(event)
 
 
@@ -215,7 +210,9 @@ def create_user():
 
 @app.route("/user/login", methods=["POST"])
 def login():
-    data = request.args
+    #data = request.args
+    data = request.get_json()
+
     username = data.get('username')
     password = data.get('password')
     current_user = User.query.filter_by(username=username).first()
@@ -232,15 +229,17 @@ def login():
 
 
 @app.route('/refresh', methods=['POST'])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def refresh():
     current_user = get_jwt_identity()
     return {'access_token': create_access_token(identity=current_user)}
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 @app.route("/user/logout", methods=['DELETE'])
-@jwt_refresh_token_required
-#@jwt_required
+#@jwt_refresh_token_required
+@jwt_required
 def logout():
     jti = get_raw_jwt()['jti']
     blacklist.add(jti)
@@ -262,11 +261,13 @@ def user_by_name(id):
 # http://127.0.0.1:5000/user/6?username=rr&firstName=De&lastName=e&email=er@ema.com&password=1234354678&phone=1232413452
 #@app.route("/user/<user_id>", methods=["PUT"])
 @app.route("/user/update", methods=["PUT"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def update_user():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
-    user_data = request.args
+    #user_data = request.args
+    user_data = request.get_json()
     up_user = User.query.get(user.id)
     if User.query.filter_by(id=user.id).first() is None:
         abort(404, description="User not found")
@@ -285,11 +286,13 @@ def update_user():
     db.session.commit()
     return user_schema.jsonify(up_user)
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # good
 #@app.route("/user/<int:id>", methods=["DELETE"])
 @app.route("/user/delete", methods=["DELETE"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def delete_user():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
@@ -324,17 +327,19 @@ def list_events_of_user(id):
 
 
 @app.route("/calendar/group", methods=["POST"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def group_of_users():
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
-    group_data = request.args
+    #group_data = request.args
+    group_data = request.get_json()
 
     user_id = int(group_data.get('user_id'))
     event_id = int(group_data.get('event_id'))
     event = Event.query.filter_by(author=user.id).first()
-    if event is None or event_id != event.id:
-        return {'message': 'Error access to event'}, 405
+    '''if event is None or event_id != event.id:
+        return {'message': 'Error access to event'}, 405'''
 
     try:
         Group().load(group_data)
@@ -354,16 +359,17 @@ def group_of_users():
 
 # good 400 404
 @app.route("/calendar/group/<int:event_id>", methods=["DELETE"])
-@jwt_refresh_token_required
+#@jwt_refresh_token_required
+@jwt_required
 def delete_group(event_id):
     current_user = get_jwt_identity()
     user = User.query.filter_by(username=current_user).first()
     group = Calendar.query.get(event_id)
-    if group is None:
-        abort(404, description="Group not found")
+    '''if group is None:
+        abort(404, description="Group not found")'''
 
-    if Event.query.filter_by(author=user.id, id=event_id) is None and group.user_id != user.id:
-        return {'message': 'Error access to event'}, 405
+    '''if Event.query.filter_by(author=user.id, id=event_id) is None and group.user_id != user.id:
+        return {'message': 'Error access to event'}, 405'''
 
     Calendar.query.filter_by(event_id=event_id).delete()
     db.session.commit()
